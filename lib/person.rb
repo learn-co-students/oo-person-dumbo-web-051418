@@ -2,8 +2,8 @@
 require 'pry'
 class Person
 
-  attr_reader :name, :hyginene, :happiness, :bank_acc
-  attr_writer :bank_acc, :hyginene, :happiness
+  attr_reader :name
+  attr_accessor :bank_acc, :hyginene, :happiness
 
   def initialize(name)
     @name = name
@@ -72,5 +72,30 @@ class Person
     return "Hi #{friend.name}. It's #{self.name}! How are you?"
   end
 
+  def start_conversation(person, topic)
+    if topic == "politics"
+      person.happiness = person.happiness - 1
+      if person.happiness < 0
+        person.happiness = 0
+      end
+      self.happiness = self.happiness - 1
+      if self.happiness < 0
+        self.happiness = 0
+      end
+      return "blah blah partisan blah lobbyist"
+    elsif topic == "weather"
+      person.happiness = person.happiness + 2
+      if person.happiness > 10
+        person.happiness = 10
+      end
+      self.happiness = self.happiness + 2
+      if self.happiness > 10
+        self.happiness = 10
+      end
+      return "blah blah sun blah rain"
+    else
+      return "blah blah blah blah blah"
+    end
+  end
   binding.pry
 end
