@@ -19,6 +19,7 @@ class Person
     return self.happiness > 7
   end
 
+binding.pry 
 
 
 end
