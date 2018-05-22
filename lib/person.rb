@@ -1,15 +1,27 @@
+# your code goes here
 require 'pry'
 
 class Person
-  attr_accessor  :bank_account, :happiness
-  attr_writer :hygiene
-  attr_reader :name
+  attr_accessor  :bank_account, :hygiene
+  attr_reader :name, :happiness
 
-  def initialize (name, bank_account=25, happiness=8, hygiene=8)
+  def initialize (name)
     @name=name
-    @bank_account=bank_account
-    @happiness=happiness
-    @hygiene=hygiene
+    @bank_account=25
+    @happiness=8
+    @hygiene=8
+  end
+
+  def happiness=(index)
+    @happiness = index
+    @happiness = 10 if @happiness > 10
+    @happiness = 0 if @happiness < 0
+  end
+
+  def hygiene=(index)
+    @hygiene = index
+    @hygiene = 10 if @hygiene >10
+    @hygiene = 0 if @hygiene < 0
   end
 
   def clean?
@@ -22,30 +34,30 @@ class Person
 
   def get_paid(salary)
     @bank_account += salary.to_i
-    return "All about the benjamins"
+    return "all about the benjamins"
   end
 
   def take_bath
-    @hygiene += 4
+    self.hygiene +=4
     return  "♪ Rub-a-dub just relaxing in the tub ♫"
   end
 
   def work_out
-    @hygiene -= 3
-    @happiness += 2
+    self.hygiene -= 3
+    self.happiness += 2
     return "♪ another one bites the dust ♫"
   end
 
   def call_friend(friend)
     friend.happiness += 3
     self.happiness += 3
-    return  "Hi #{self.name}. It's #{friend.name}! How are you?"
+    return  "Hi #{friend.name}! It's #{self.name}. How are you?"
   end
 
   def start_conversation(leader,topic)
     if topic=="politics"
-      leader.happiness-=1
-      self.happiness-=1
+      leader.happiness-=2
+      self.happiness-=2
       return "blah blah partisan blah lobbyist"
     elsif topic =="weather"
       leader.happiness+=1
@@ -56,22 +68,3 @@ class Person
     end
   end
 end
-
-  jee=Person.new("Jee", 25,15,15)
-
-  michael=Person.new("Michael", 25,15,15)
-
-  puts "#{jee.happiness}"
-  puts "#{michael.happiness}"
-  p jee.call_friend(michael)
-
-  puts "#{jee.happiness}"
-  puts "#{michael.happiness}"
-
-   # p jee.take_bath
-  # puts jee.name
-  # p jee.work_out
-
-  jee.call_friend(michael=Person.new("g", 25,15,15))
-
-  p jee.start_conversation(michael,"cats")
